@@ -10,17 +10,17 @@ export async function getContacts(page = 0, size = 10) {
 }
 
 export async function getContact(id) {
-  return await axios.post(`${API_URL}/${id}`);
+  return await axios.get(`${API_URL}/${id}`);
 }
 
 export async function updateContact(contact) {
-  return await axios.post(API_URL, contact);
+  return await axios.post(`${API_URL}/${contact.id}`, contact);
 }
 
-export async function updatePhoto(formDate) {
-  return await axios.put(`${API_URL}/photo`, formDate);
+export async function updatePhoto(formData) {
+  return await axios.put(`${API_URL}/photo`, formData);
 }
 
-export async function deleteContact(contact) {
+export async function deleteContact(id) {
   return await axios.delete(`${API_URL}/${id}`);
 }
