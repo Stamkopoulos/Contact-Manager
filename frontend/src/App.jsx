@@ -26,7 +26,7 @@ function App() {
 
   return (
     <>
-      <Header toggleModal={toggleModal} nbOfContects={50} />
+      <Header toggleModal={toggleModal} nbOfContacts={50} />
     </>
   );
 }
