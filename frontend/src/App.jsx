@@ -21,7 +21,7 @@ function App() {
     status: "",
   });
 
-  const getAllContacts = async (page = 0, size = 10) => {
+  const getAllContacts = async (page = 0, size = 3) => {
     try {
       setCurrentPage(page);
       const respone = await getContacts(page, size);
@@ -48,6 +48,7 @@ function App() {
       setFile(undefined);
       fileRef.current.value = null;
       setValues({
+        id: "",
         name: "",
         email: "",
         phone: "",
@@ -61,7 +62,14 @@ function App() {
     }
   };
 
-  const updateContact = async () => {};
+  const updateContact = async (formData) => {
+    try {
+      const data = await saveContact(formData);
+      console.log(data);
+    } catch (error) {
+      console.log(error);
+    }
+  };
 
   const updateImage = async (formData) => {
     try {
