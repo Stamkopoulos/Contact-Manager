@@ -2,6 +2,7 @@ import React, { useEffect, useRef, useState } from "react";
 import { useParams } from "react-router-dom";
 import { getContact } from "../api/ContactService";
 import { Link } from "react-router-dom";
+import { toastError, toastSuccess } from "../api/ToastService";
 const Contactdetail = ({ updateContact, updateImage }) => {
   const inputRef = useRef();
   const [contact, setContact] = useState({
@@ -21,8 +22,10 @@ const Contactdetail = ({ updateContact, updateImage }) => {
       const { data } = await getContact(id);
       setContact(data);
       console.log(data);
+      //toastSuccess("Contact retrieved");
     } catch (error) {
       console.log(error);
+      toastError(error.message);
     }
   };
   const selectImage = () => {
@@ -40,8 +43,10 @@ const Contactdetail = ({ updateContact, updateImage }) => {
         photoUrl: `${prev.photoUrl}?updated_at=${new Date().getTime()}`,
       }));
       console.log("data");
+      toastSuccess("Photo updated");
     } catch (error) {
       console.log(error);
+      toastError(error.message);
     }
   };
 
@@ -49,6 +54,7 @@ const Contactdetail = ({ updateContact, updateImage }) => {
     event.preventDefault();
     await updateContact(contact);
     fetchContact(id);
+    toastSuccess("Contact updated");
   };
 
   const onChange = (event) => {
@@ -67,7 +73,7 @@ const Contactdetail = ({ updateContact, updateImage }) => {
       <div className="profil">
         <div className="profile__details">
           <img
-            src={contact.photoUrl || "https://via.placeholder.com/150"}
+            src={contact.photoUrl || "/default.png"}
             alt={`Profile photo of ${contact.name}`}
           />
           <div className="profile__metadata">

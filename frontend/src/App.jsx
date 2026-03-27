@@ -5,6 +5,8 @@ import Header from "./components/Header";
 import { Route, Routes, Navigate } from "react-router-dom";
 import ContactList from "./components/ContactList";
 import Contactdetail from "./components/Contactdetail";
+import { toastError } from "./api/ToastService";
+import { ToastContainer } from "react-toastify";
 
 function App() {
   const modalRef = useRef();
@@ -29,6 +31,7 @@ function App() {
       console.log(respone.data);
     } catch (error) {
       console.log(error);
+      toastError(error.message);
     }
   };
 
@@ -59,6 +62,7 @@ function App() {
       getAllContacts();
     } catch (error) {
       console.log(error);
+      toastError(error.message);
     }
   };
 
@@ -68,6 +72,7 @@ function App() {
       console.log(data);
     } catch (error) {
       console.log(error);
+      toastError(error.message);
     }
   };
 
@@ -77,6 +82,7 @@ function App() {
       console.log(data);
     } catch (error) {
       console.log(error);
+      toastError(error.message);
     }
   };
 
@@ -214,6 +220,7 @@ function App() {
           </form>
         </div>
       </dialog>
+      <ToastContainer />
     </>
   );
 }
